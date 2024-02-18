@@ -1,5 +1,14 @@
 import axios from "axios";
-import { Trip } from "./types";
+import { Trip, WeatherData } from "./types";
+export const daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 export const getFormattedDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -17,10 +26,11 @@ export const getData = async (selectedCity: string, selectedDate: string) => {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${selectedCity}?unitGroup=metric&include=days&key=${API_KEY}&contentType=json&startDateTime=${selectedDate}T00:00:00`;
 
   try {
-    const response = await axios.get<any>(url);
+    const response = await axios.get<WeatherData>(url);
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
+    throw error;
   }
 };
 export const filtredTrips = (trips: Trip[], filterValue: string) => {
@@ -31,4 +41,9 @@ export const filtredTrips = (trips: Trip[], filterValue: string) => {
     return trips;
   }
   return [];
+};
+
+export const converDataToDayWeek = (data: string) => {
+  const date = new Date(data);
+  return daysOfWeek[date.getDay()];
 };
