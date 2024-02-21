@@ -21,7 +21,8 @@ export const GoogleAuth = () => {
     setUser(null);
   };
 
-  const fetchData = async (user) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fetchData = async (user: any) => {
     try {
       setIsLoad(false);
       const res = await axios.get(
