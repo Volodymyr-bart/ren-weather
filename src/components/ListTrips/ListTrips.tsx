@@ -1,4 +1,6 @@
 import { Trip } from "../../types";
+// import CarouselComponent from "../Carousel/Carousel";
+
 import "./ListTrips.css";
 interface ListTripsProps {
   trips: Trip[];
@@ -20,6 +22,7 @@ const ListTrips = ({
   };
   return (
     <div className="trips-container">
+      {/* <CarouselComponent items={trips} element={<Trip />} /> */}
       <ul className="trips-list">
         {trips.map((trip) => (
           <li

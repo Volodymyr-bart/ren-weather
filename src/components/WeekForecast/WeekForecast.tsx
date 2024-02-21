@@ -38,7 +38,7 @@ const WeekForecast = ({ trip }: WeekForecastProps) => {
       ) : (
         <ul className="weather-list">
           {weatherData &&
-            weatherData.days.map((day) => (
+            weatherData.days.slice(0, 7).map((day) => (
               <li key={day.datetime} className="weather-item">
                 <p>{day.datetime}</p>
                 <p>{converDataToDayWeek(day.datetime)}</p>

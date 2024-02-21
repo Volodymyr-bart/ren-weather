@@ -1,18 +1,19 @@
 import { ChangeEvent, useState } from "react";
 import "./App.css";
 import ListTrips from "./components/ListTrips/ListTrips";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useLocalStorageTrips } from "./hooks/useLocalStorage";
 import { Trip } from "./types";
 import Filter from "./components/Filter/Filter";
 import { filtredTrips, initialTrips } from "./common";
 import WeekForecast from "./components/WeekForecast/WeekForecast";
 import Container from "./components/Container/Container";
 import AddNewTrip from "./components/AddNewTrip/AddNewTrip";
+import Header from "./components/Header/Header";
 
 function App() {
   const [filterValue, setFilterValue] = useState<string>("");
 
-  const [trips, setTrips] = useLocalStorage("trips", initialTrips);
+  const [trips, setTrips] = useLocalStorageTrips("trips", initialTrips);
   const [selectedTripId, setSelectedTripId] = useState<string | null>(
     trips[0].id
   );
@@ -41,13 +42,7 @@ function App() {
 
   return (
     <Container>
-      <header>
-        <nav>
-          <ul>
-            <li>Google auth</li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
       <main className="main-page">
         <h2>
           Weather <strong>Forecast</strong>

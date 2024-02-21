@@ -1,0 +1,11 @@
+.actions-slider {
+  /* margin: 0 auto; */
+  display: flex;
+  gap: 20px;
+}
+.carousele {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
