@@ -42,7 +42,7 @@ const WeekForecast = ({ trip }: WeekForecastProps) => {
               <li key={day.datetime} className="weather-item">
                 <p>{day.datetime}</p>
                 <p>{converDataToDayWeek(day.datetime)}</p>
-                <svg style={{ width: "40px", height: "40px" }}>
+                <svg className="weather-item__icon">
                   <use href={`${sprite}#icon-${day.icon}`} />
                 </svg>
                 <p>

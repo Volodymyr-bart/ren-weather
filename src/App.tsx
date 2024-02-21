@@ -4,43 +4,10 @@ import ListTrips from "./components/ListTrips/ListTrips";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { Trip } from "./types";
 import Filter from "./components/Filter/Filter";
-import { filtredTrips } from "./common";
+import { filtredTrips, initialTrips } from "./common";
 import WeekForecast from "./components/WeekForecast/WeekForecast";
 import Container from "./components/Container/Container";
 import AddNewTrip from "./components/AddNewTrip/AddNewTrip";
-const initialTrips: Trip[] = [
-  {
-    id: "1",
-    city: "Zhytomyr",
-    startDate: "2024-02-21",
-    endDate: "2024-02-25",
-    imgSrc:
-      "https://focus.ua/static/storage/thumbs/920x465/3/84/62862b5f-18becd93b2f63add3140e02c395dd843.jpg?v=0325_1",
-  },
-  {
-    id: "2",
-    city: "Kyiv",
-    startDate: "2024-02-21",
-    endDate: "2024-02-25",
-    imgSrc:
-      "https://faktypro.com.ua/uploads/img/23-cikavih-faktu-pro-kiyiv.jpg",
-  },
-  {
-    id: "3",
-    city: "Vinnytsia",
-    startDate: "2024-02-21",
-    endDate: "2024-02-25",
-    imgSrc: "https://tamtour.com.ua/local/image/440/009/ua241.jpg",
-  },
-  {
-    id: "4",
-    city: "Zhytomyr",
-    startDate: "2024-02-21",
-    endDate: "2024-02-25",
-    imgSrc:
-      "https://focus.ua/static/storage/thumbs/920x465/3/84/62862b5f-18becd93b2f63add3140e02c395dd843.jpg?v=0325_1",
-  },
-];
 
 function App() {
   const [filterValue, setFilterValue] = useState<string>("");
