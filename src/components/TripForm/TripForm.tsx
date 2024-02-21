@@ -1,15 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { getFormattedDate, getImageByQuery } from "../../common";
-
+import { citiesApi, getFormattedDate } from "../../common";
 import { nanoid } from "nanoid";
 import { FormData, Trip } from "../../types";
+import "./TripForm.css";
 
 interface TripFormProps {
   onSubmit: (trip: Trip) => void;
 }
-
-const cities: string[] = ["Kyiv", "Vinnytsia", "Zhytomyr"];
 
 const TripForm: React.FC<TripFormProps> = ({ onSubmit }) => {
   const { register, handleSubmit, reset } = useForm<FormData>();
@@ -18,15 +16,12 @@ const TripForm: React.FC<TripFormProps> = ({ onSubmit }) => {
   maxDate.setDate(currentDate.getDate() + 15);
 
   const generateIdAndSubmit = async (data: FormData) => {
-    const result = await getImageByQuery(data.city);
-    console.log(result);
-    let imgSrc;
-    if (result.hits) {
-      imgSrc = result.hits[0].largeImageURL;
-    } else {
-      imgSrc =
-        "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg";
-    }
+    // const result = await getImageByQuery(data.city);
+    const findCity = citiesApi.find((city) => city.title === data.city);
+    const imgSrc = findCity?.imgSrc
+      ? findCity.imgSrc
+      : "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg";
+
     const genId = nanoid();
     const newTrip: Trip = { ...data, imgSrc, id: genId };
     onSubmit(newTrip);
@@ -36,38 +31,21 @@ const TripForm: React.FC<TripFormProps> = ({ onSubmit }) => {
   return (
     <>
       <h2>Create trip</h2>
-      <form
-        onSubmit={handleSubmit(generateIdAndSubmit)}
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-            alignItems: "flex-start",
-          }}
-        >
+      <form onSubmit={handleSubmit(generateIdAndSubmit)} className="form-trip">
+        <div className="form-trip-item">
           <label>City:</label>
           <select
             {...register("city", { required: true })}
-            defaultValue={cities[0]}
+            defaultValue={citiesApi[0].title}
           >
-            {cities.map((city) => (
-              <option key={city} value={city}>
-                {city}
+            {citiesApi.map((city) => (
+              <option key={city.title} value={city.title}>
+                {city.title}
               </option>
             ))}
           </select>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-            alignItems: "flex-start",
-          }}
-        >
+        <div className="form-trip-item">
           <label>Start Date:</label>
           <input
             type="date"
@@ -76,14 +54,7 @@ const TripForm: React.FC<TripFormProps> = ({ onSubmit }) => {
             max={getFormattedDate(maxDate)}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-            alignItems: "flex-start",
-          }}
-        >
+        <div className="form-trip-item">
           <label>End Date:</label>
           <input
             type="date"

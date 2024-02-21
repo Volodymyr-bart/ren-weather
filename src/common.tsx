@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Trip, WeatherData } from "./types";
+import { City, Trip, WeatherData } from "./types";
 export const daysOfWeek = [
   "Sunday",
   "Monday",
@@ -8,6 +8,32 @@ export const daysOfWeek = [
   "Thursday",
   "Friday",
   "Saturday",
+];
+export const citiesApi: City[] = [
+  {
+    title: "Berlin",
+    imgSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29.jpg/1200px-Museumsinsel_Berlin_Juli_2021_1_%28cropped%29.jpg",
+  },
+  {
+    title: "Warshava",
+    imgSrc:
+      "https://www.poland.travel/images/ru-RU/Miasta/warszawa_plac_zamkowy_1170.jpg",
+  },
+  {
+    title: "Kyiv",
+    imgSrc:
+      "https://faktypro.com.ua/uploads/img/23-cikavih-faktu-pro-kiyiv.jpg",
+  },
+  {
+    title: "Vinnytsia",
+    imgSrc: "https://tamtour.com.ua/local/image/440/009/ua241.jpg",
+  },
+  {
+    title: "Zhytomyr",
+    imgSrc:
+      "https://focus.ua/static/storage/thumbs/920x465/3/84/62862b5f-18becd93b2f63add3140e02c395dd843.jpg?v=0325_1",
+  },
 ];
 
 export const getFormattedDate = (date: Date): string => {

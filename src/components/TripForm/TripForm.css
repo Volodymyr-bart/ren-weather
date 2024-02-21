@@ -1,0 +1,11 @@
+.form-trip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-trip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}

@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Trip } from "../../types";
-import Modal from "../Modal/Modal";
-import TripForm from "../TripForm/TripForm";
 import "./ListTrips.css";
 interface ListTripsProps {
   trips: Trip[];
   handleDeleteTrip: (id: string) => void;
-  handleAddTrip: (trip: Trip) => void;
+  // handleAddTrip: (trip: Trip) => void;
   selectedTripId: string | null;
   setSelectedTripId: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -15,16 +12,9 @@ const ListTrips = ({
   selectedTripId,
   trips,
   handleDeleteTrip,
-  handleAddTrip,
+  // handleAddTrip,
   setSelectedTripId,
 }: ListTripsProps) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
   const handleTripClick = (id: string) => {
     setSelectedTripId(id);
   };
@@ -68,25 +58,6 @@ const ListTrips = ({
           </li>
         ))}
       </ul>
-      <button
-        onClick={handleOpenModal}
-        style={{ background: "grey", width: "200px", height: "200px" }}
-      >
-        +<br />
-        Add Trip
-      </button>
-      <Modal
-        children={
-          <TripForm
-            onSubmit={(trip) => {
-              handleAddTrip(trip);
-              handleCloseModal();
-            }}
-          />
-        }
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
     </div>
   );
 };

@@ -5,7 +5,10 @@ export type Trip = {
   startDate: string;
   endDate: string;
 };
-
+export type City = {
+  title: string;
+  imgSrc: string;
+};
 export interface FormData {
   city: string;
   startDate: string;

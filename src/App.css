@@ -3,3 +3,8 @@
   flex-direction: column;
   margin: 0 auto;
 }
+.main-page__trips-action {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -2,7 +2,8 @@ import { converDataToDayWeek, geWeathertData } from "../../common";
 import sprite from "../../assets/weather-icons/sprite.svg";
 import { Trip, WeatherData } from "../../types";
 import { useEffect, useState } from "react";
-
+import Loader from "../Loader/Loader";
+import "./WeekForecast.css";
 interface WeekForecastProps {
   trip: Trip;
 }
@@ -23,27 +24,22 @@ const WeekForecast = ({ trip }: WeekForecastProps) => {
   };
 
   useEffect(() => {
-    fetchData(trip);
+    if (trip) {
+      fetchData(trip);
+    }
   }, [trip]);
 
   return (
     <>
       {isLoading ? (
-        <>Loading...</>
+        <div>
+          <Loader />
+        </div>
       ) : (
-        <ul
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "15px",
-            margin: "0 auto",
-          }}
-        >
+        <ul className="weather-list">
           {weatherData &&
             weatherData.days.map((day) => (
-              <li key={day.datetime} style={{ width: "100px" }}>
+              <li key={day.datetime} className="weather-item">
                 <p>{day.datetime}</p>
                 <p>{converDataToDayWeek(day.datetime)}</p>
                 <svg style={{ width: "40px", height: "40px" }}>
