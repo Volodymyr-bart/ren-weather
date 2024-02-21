@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { getFormattedDate } from "../../common";
+import { getFormattedDate, getImageByQuery } from "../../common";
 
 import { nanoid } from "nanoid";
-import { FormData } from "../../types";
+import { FormData, Trip } from "../../types";
 
 interface TripFormProps {
-  onSubmit: (data: FormData) => void;
+  onSubmit: (trip: Trip) => void;
 }
 
 const cities: string[] = ["Kyiv", "Vinnytsia", "Zhytomyr"];
@@ -17,9 +17,19 @@ const TripForm: React.FC<TripFormProps> = ({ onSubmit }) => {
   const maxDate = new Date();
   maxDate.setDate(currentDate.getDate() + 15);
 
-  const generateIdAndSubmit = (data: FormData) => {
-    data.id = nanoid();
-    onSubmit(data);
+  const generateIdAndSubmit = async (data: FormData) => {
+    const result = await getImageByQuery(data.city);
+    console.log(result);
+    let imgSrc;
+    if (result.hits) {
+      imgSrc = result.hits[0].largeImageURL;
+    } else {
+      imgSrc =
+        "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg";
+    }
+    const genId = nanoid();
+    const newTrip: Trip = { ...data, imgSrc, id: genId };
+    onSubmit(newTrip);
     reset();
   };
 

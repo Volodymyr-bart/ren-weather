@@ -1,0 +1,35 @@
+.trips-container {
+  display: inline-flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 20px auto;
+}
+.trips-list {
+  display: flex;
+  gap: 30px;
+  margin: 0px auto;
+}
+.trips-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 200px;
+  border: 1px solid grey;
+  margin: 0px auto;
+  background-color: white;
+}
+.trips-item.active {
+  background-color: lightblue;
+}
+
+.trips-item__picture {
+  width: 200px;
+  height: 200px;
+  background-color: grey;
+}
+.trips-item__date {
+  margin-bottom: 10px;
+}

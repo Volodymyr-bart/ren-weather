@@ -1,4 +1,4 @@
-import { converDataToDayWeek, getData } from "../../common";
+import { converDataToDayWeek, geWeathertData } from "../../common";
 import sprite from "../../assets/weather-icons/sprite.svg";
 import { Trip, WeatherData } from "../../types";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ const WeekForecast = ({ trip }: WeekForecastProps) => {
   const fetchData = async (trip: Trip) => {
     try {
       setIsLoading(true);
-      const result = await getData(trip.city, trip.startDate);
+      const result = await geWeathertData(trip.city, trip.startDate);
       setDataWeatherData(result ?? null);
     } catch (error) {
       console.log("error", error);
@@ -31,10 +31,20 @@ const WeekForecast = ({ trip }: WeekForecastProps) => {
       {isLoading ? (
         <>Loading...</>
       ) : (
-        <ul style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
+        <ul
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "15px",
+            margin: "0 auto",
+          }}
+        >
           {weatherData &&
             weatherData.days.map((day) => (
               <li key={day.datetime} style={{ width: "100px" }}>
+                <p>{day.datetime}</p>
                 <p>{converDataToDayWeek(day.datetime)}</p>
                 <svg style={{ width: "40px", height: "40px" }}>
                   <use href={`${sprite}#icon-${day.icon}`} />

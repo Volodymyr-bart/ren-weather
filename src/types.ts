@@ -1,18 +1,17 @@
 export type Trip = {
   id: string;
   city: string;
+  imgSrc: string;
   startDate: string;
   endDate: string;
 };
 
 export interface FormData {
-  id: string;
   city: string;
   startDate: string;
   endDate: string;
 }
 
-// Define subtypes for the nested structures
 export interface WeatherConditions {
   datetime: string;
   datetimeEpoch: number;

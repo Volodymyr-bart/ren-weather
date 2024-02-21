@@ -21,8 +21,11 @@ export const getFormattedDate = (date: Date): string => {
   return `${year}-${formattedMonth}-${formattedDay}`;
 };
 
-export const API_KEY = import.meta.env.VITE_API_KEY;
-export const getData = async (selectedCity: string, selectedDate: string) => {
+export const geWeathertData = async (
+  selectedCity: string,
+  selectedDate: string
+) => {
+  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${selectedCity}?unitGroup=metric&include=days&key=${API_KEY}&contentType=json&startDateTime=${selectedDate}T00:00:00`;
 
   try {
@@ -30,6 +33,18 @@ export const getData = async (selectedCity: string, selectedDate: string) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
+    throw error;
+  }
+};
+export const getImageByQuery = async (query: string) => {
+  const API_KEY = import.meta.env.VITE_PIXABY_API_KEY;
+  const url = `https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=1`;
+
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching image:", error);
     throw error;
   }
 };
