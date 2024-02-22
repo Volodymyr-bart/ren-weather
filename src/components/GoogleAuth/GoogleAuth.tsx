@@ -1,10 +1,29 @@
-import { useState, useEffect } from "react";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { FcGoogle } from "react-icons/fc";
+import { useState, useEffect } from "react";
+// import {
+// LoginSocialGoogle,
+// LoginSocialAmazon,
+// LoginSocialFacebook,
+// LoginSocialGithub,
+// LoginSocialInstagram,
+// LoginSocialLinkedin,
+// LoginSocialMicrosoft,
+// LoginSocialPinterest,
+// LoginSocialTwitter,
+// LoginSocialApple,
+// LoginSocialTiktok,
+// IResolveParams,
+// } from "reactjs-social-login";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import {
+  // FacebookLoginButton,
+  GoogleLoginButton,
+} from "react-social-login-buttons";
 import { SlLogout } from "react-icons/sl";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+
 import "./GoogleAuth.css";
+// const FACEBOOK_CLIENT_ID = import.meta.env.VITE_FACEBOOK_CLIENT_ID;
 
 export const GoogleAuth = () => {
   const [user, setUser] = useLocalStorage("user", null);
@@ -61,10 +80,22 @@ export const GoogleAuth = () => {
           <p>Email: {profile?.email}</p>
         </>
       ) : (
-        <button onClick={() => login()} className="btn-google">
-          <FcGoogle />
-          Sign in with Google
-        </button>
+        <div style={{ display: "flex" }}>
+          <GoogleLoginButton
+            style={{ width: "300px" }}
+            onClick={() => login()}
+          />
+          {/* <LoginSocialFacebook
+            appId="310910818648684"
+            onResolve={(response) => console.log(response)}
+            onReject={(error) => console.log(error)}
+          >
+            <FacebookLoginButton
+              style={{ width: "300px" }}
+              // onClick={() => alert("Login with facebook")}
+            />
+          </LoginSocialFacebook> */}
+        </div>
       )}
     </div>
   );

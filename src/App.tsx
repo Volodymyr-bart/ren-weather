@@ -9,6 +9,7 @@ import WeekForecast from "./components/WeekForecast/WeekForecast";
 import Container from "./components/Container/Container";
 import AddNewTrip from "./components/AddNewTrip/AddNewTrip";
 import Header from "./components/Header/Header";
+import Aside from "./components/Aside/Aside";
 
 function App() {
   const [filterValue, setFilterValue] = useState<string>("");
@@ -44,22 +45,28 @@ function App() {
     <Container>
       <Header />
       <main className="main-page">
-        <h2>
-          Weather <strong>Forecast</strong>
-        </h2>
-        <div className="main-page__trips-action">
-          <Filter filterValue={filterValue} handleSetFilter={handleSetFilter} />
-          <AddNewTrip handleAddTrip={handleAddTrip} />
+        <div className="main-page__content">
+          <h2>
+            Weather <strong>Forecast</strong>
+          </h2>
+          <div className="main-page__trips-action">
+            <Filter
+              filterValue={filterValue}
+              handleSetFilter={handleSetFilter}
+            />
+            <AddNewTrip handleAddTrip={handleAddTrip} />
+          </div>
+          <ListTrips
+            trips={filtredTrips(trips, filterValue)}
+            handleDeleteTrip={handleDeleteTrip}
+            // handleAddTrip={handleAddTrip}
+            selectedTripId={selectedTripId}
+            setSelectedTripId={setSelectedTripId}
+          />
+          <h3>Week</h3>
+          <WeekForecast trip={getSelectedTrip()} />
         </div>
-        <ListTrips
-          trips={filtredTrips(trips, filterValue)}
-          handleDeleteTrip={handleDeleteTrip}
-          // handleAddTrip={handleAddTrip}
-          selectedTripId={selectedTripId}
-          setSelectedTripId={setSelectedTripId}
-        />
-        <h3>Week</h3>
-        <WeekForecast trip={getSelectedTrip()} />
+        <Aside trip={getSelectedTrip()}/>
       </main>
     </Container>
   );
