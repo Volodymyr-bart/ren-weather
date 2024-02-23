@@ -99,8 +99,7 @@ export const geWeathertData = async (
 export const getWeathertDataCity = async (selectedCity: string) => {
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${selectedCity}/today?unitGroup=metric&include=days&key=${API_KEY}&contentType=json`;
-  console.log(API_KEY);
-  
+
   try {
     const response = await axios.get(url);
     return response.data;
@@ -124,7 +123,9 @@ export const getImageByQuery = async (query: string) => {
 export const filtredTrips = (trips: Trip[], filterValue: string) => {
   if (trips.length) {
     if (filterValue) {
-      return trips.filter((trip: Trip) => trip.city.includes(filterValue));
+      return trips.filter((trip: Trip) =>
+        trip.city.toLowerCase().includes(filterValue.toLowerCase())
+      );
     }
     return trips;
   }
