@@ -9,8 +9,9 @@
 // import sprite from "../../assets/weather-icons/sprite.svg";
 // import "./Carousel.css";
 // import { ReactNode } from "react";
+// import { Trip } from "../../types";
 // interface CarouselProps {
-//   items: any;
+//   items: Trip[];
 //   element: ReactNode;
 // }
 

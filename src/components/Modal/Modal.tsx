@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { MouseEvent, ReactNode } from "react";
 import "./Modal.css";
+
 interface ModalProps {
   children: ReactNode;
   onClose: () => void;
@@ -12,6 +14,25 @@ const Modal = ({ isOpen, children, onClose }: ModalProps) => {
       onClose();
     }
   };
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyPress);
+    } else {
+      document.removeEventListener("keydown", handleKeyPress);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <div
       className={`modal-backdrop ${isOpen ? "active" : ""}`}
