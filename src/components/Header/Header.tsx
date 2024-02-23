@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { GoogleAuth } from "../GoogleAuth/GoogleAuth";
 import { SlLogout } from "react-icons/sl";
 
 import "./Header.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import FacebookAuth from "../FacebookAuth/FacebookAuth";
+// import FacebookAuth from "../FacebookAuth/FacebookAuth";
 
 const Header = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -79,7 +78,7 @@ const Header = () => {
       ) : (
         <div style={{ display: "flex" }}>
           <GoogleAuth setUser={setUser} />
-          <FacebookAuth />
+          {/* <FacebookAuth /> */}
         </div>
       )}
     </header>
